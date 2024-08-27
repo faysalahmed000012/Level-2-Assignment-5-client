@@ -6,6 +6,7 @@ import "./index.css";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import Facilities from "./pages/Facilities.tsx";
+import FacilityDetail from "./pages/FacilityDetail.tsx";
 import Home from "./pages/Home.tsx";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/facilities",
         element: <Facilities />,
+      },
+      {
+        path: "/facility/:id",
+        element: <FacilityDetail />,
       },
     ],
   },
