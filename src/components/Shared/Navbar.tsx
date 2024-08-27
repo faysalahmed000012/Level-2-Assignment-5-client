@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+
 const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
@@ -28,33 +31,37 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="">Item 1</a>
+              <Link to="/contact">Contact</Link>
             </li>
             <li>
-              <a>Item 2</a>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
-              <a>Item 3</a>
+              <Link to="/register">Register</Link>
             </li>
           </ul>
         </div>
-        <a className="text-xl">SportHaven</a>
+        <Link to="/">
+          <img className=" h-16" src={logo} alt="" />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
+            <Link to="/contact">Contact</Link>
           </li>
           <li>
-            <a>Item 2</a>
+            <Link to="/about">About Us</Link>
           </li>
           <li>
-            <a>Item 3</a>
+            <Link to="/register">Register</Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-primary text-white">Login</a>
+        <Link to="/login" className="btn btn-primary text-white">
+          Login
+        </Link>
       </div>
     </div>
   );
