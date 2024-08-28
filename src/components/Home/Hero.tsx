@@ -21,7 +21,7 @@ const Hero = () => {
               onClick={() => navigate("/facilities")}
               className="btn btn-primary text-white rounded-3xl"
             >
-              Book Facility
+              All Facilities
             </button>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import Filtering from "../components/facilities/Filtering";
 import Search from "../components/facilities/Search";
 import FacilityCard from "../components/Shared/FacilityCard";
+import { useGetAllFacilityQuery } from "../redux/features/facility/facilityManagement.api";
+import { TFacility } from "../types";
 
 const Facilities = () => {
-  const arr1 = new Array(20).fill("*");
+  const { data, isLoading, isError, isFetching } = useGetAllFacilityQuery({});
   return (
     <div>
       <h1 className="mt-10 mb-6 text-2xl text-center">
@@ -12,8 +14,11 @@ const Facilities = () => {
       <Search />
       <Filtering />
       <div className="mt-6 grid lg:grid-cols-4 gap-6">
-        {arr1.map((item) => (
-          <FacilityCard key={item} />
+        {(isLoading || isFetching) && (
+          <span className="loading loading-ring loading-lg"></span>
+        )}
+        {data?.data?.map((item: TFacility) => (
+          <FacilityCard key={item._id} facility={item} />
         ))}
       </div>
     </div>
