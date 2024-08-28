@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
+import { useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
+  const user = useAppSelector((state) => state.auth.user);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -59,12 +61,20 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="/login"
-          className="btn btn-primary text-white font-bold  w-20 transition-all duration-300 ease-in-out transform hover:rounded-full"
-        >
-          Login
-        </Link>
+        {user ? (
+          <>
+            <button className="btn btn-red bg-red-500 text-white font-bold  w-20 transition-all duration-300 ease-in-out transform hover:rounded-full">
+              Log Out
+            </button>
+          </>
+        ) : (
+          <Link
+            to="/login"
+            className="btn btn-primary text-white font-bold  w-20 transition-all duration-300 ease-in-out transform hover:rounded-full"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

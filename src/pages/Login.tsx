@@ -1,15 +1,39 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../redux/features/auth/authApi";
+import { setUser, TUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks";
+import { verifyToken } from "../utils";
 
 const Login = () => {
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
     const target = e.target as typeof e.target & {
       email: { value: string };
       password: { value: string };
     };
+
     console.log(target?.email?.value);
     console.log(target?.password?.value);
+
+    try {
+      const userInfo = {
+        email: target?.email?.value,
+        password: target?.password?.value,
+      };
+      const res = await login(userInfo);
+      const user = verifyToken(res.data.token) as TUser;
+      dispatch(setUser({ user: user, token: res.data.token }));
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
