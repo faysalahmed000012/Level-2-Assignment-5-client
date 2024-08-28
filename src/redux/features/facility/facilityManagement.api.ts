@@ -3,10 +3,13 @@ import { baseApi } from "../../api/baseApi";
 const facilityManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllFacility: builder.query({
-      query: () => {
+      query: (queries: any) => {
+        const params = new URLSearchParams();
+        params.append("limit", queries[0].limit);
         return {
           url: "/facility",
           method: "GET",
+          params: params,
         };
       },
     }),

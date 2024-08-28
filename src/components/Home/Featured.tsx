@@ -3,7 +3,7 @@ import { TFacility } from "../../types";
 import FacilityCard from "../Shared/FacilityCard";
 
 const Featured = () => {
-  const { data, isError, isLoading } = useGetAllFacilityQuery({});
+  const { data, isError, isLoading } = useGetAllFacilityQuery([{ limit: 8 }]);
   console.log(data);
   return (
     <div>
@@ -14,7 +14,7 @@ const Featured = () => {
             <span className="loading loading-ring loading-lg"></span>
           </div>
         )}
-        {data?.data?.map((item: TFacility) => (
+        {data?.data?.facilities.map((item: TFacility) => (
           <FacilityCard key={item._id} facility={item} />
         ))}
       </div>

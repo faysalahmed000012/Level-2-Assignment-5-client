@@ -7,19 +7,23 @@ import { TFacility } from "../types";
 
 const Facilities = () => {
   const [query, setQuery] = useState("");
-  const [limit, setLimit] = useState("");
-  const { data, isLoading, isError, isFetching } = useGetAllFacilityQuery({});
-  let main = data?.data;
-  if (query && data.data) {
-    main = data.data.filter(
+  const [sort, setSort] = useState("");
+  const [limit, setLimit] = useState(10);
+  const { data, isLoading, isError, isFetching } = useGetAllFacilityQuery([
+    { limit },
+  ]);
+  console.log(data?.data?.facilities);
+  let main = data?.data?.facilities;
+  if (query && data.data.facilities) {
+    main = data.data.facilities.filter(
       (item: TFacility) =>
         item.name.toLowerCase().includes(query.toLowerCase()) ||
         item.location.toLowerCase().includes(query.toLowerCase())
     );
   }
-  if (limit == "low to high") {
+  if (sort == "low to high") {
     main = [...main].sort((a, b) => a.pricePerHour - b.pricePerHour);
-  } else if (limit == "high to low") {
+  } else if (sort == "high to low") {
     main = [...main].sort((a, b) => b.pricePerHour - a.pricePerHour);
   }
   return (
@@ -28,7 +32,7 @@ const Facilities = () => {
         Here is all our Sport Facilities
       </h1>
       <Search query={query} setQuery={setQuery} />
-      <Filtering limit={limit} setLimit={setLimit} />
+      <Filtering setSort={setSort} setLimit={setLimit} />
       <div className="mt-6 grid lg:grid-cols-4 gap-6">
         {isLoading || isFetching ? (
           <span className="loading loading-ring loading-lg"></span>
