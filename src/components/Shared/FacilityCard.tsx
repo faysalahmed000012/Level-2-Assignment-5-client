@@ -1,4 +1,6 @@
-const FacilityCard = () => {
+import { TFacility } from "../../types";
+
+const FacilityCard = ({ facility }: { facility: TFacility }) => {
   return (
     <div>
       <div className="card card-compact bg-base-100 w-96 shadow-xl">
@@ -9,10 +11,12 @@ const FacilityCard = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 className="card-title">{facility.name}</h2>
+          <p className="mt-2">{facility.pricePerHour}</p>
+          <p className="mt-2">{facility.location}</p>
+          <p className="mt-2">{facility.description}</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary text-white">Buy Now</button>
+            <button className="btn btn-primary text-white">Book Now</button>
           </div>
         </div>
       </div>

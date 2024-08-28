@@ -1,13 +1,21 @@
+import { useGetAllFacilityQuery } from "../../redux/features/facility/facilityManagement.api";
+import { TFacility } from "../../types";
 import FacilityCard from "../Shared/FacilityCard";
 
 const Featured = () => {
-  const arr = new Array(9).fill("*");
+  const { data, isError, isLoading } = useGetAllFacilityQuery({});
+  console.log(data);
   return (
     <div>
       <h1 className="text-3xl">Featured Facilities</h1>
       <div className="mt-3 grid lg:grid-cols-4 gap-6">
-        {arr.map((item) => (
-          <FacilityCard key={item} />
+        {isLoading && (
+          <div>
+            <span className="loading loading-ring loading-lg"></span>
+          </div>
+        )}
+        {data?.data?.map((item: TFacility) => (
+          <FacilityCard key={item._id} facility={item} />
         ))}
       </div>
     </div>

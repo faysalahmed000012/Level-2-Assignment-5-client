@@ -10,9 +10,7 @@ const Filtering = () => {
       </select>
       <select className="select select-bordered w-full max-w-xs rounded-full my-3 md:my-0">
         <option>5 items per page</option>
-        <option disabled selected>
-          Items Per Page (Default 10)
-        </option>
+        <option selected>Items Per Page (Default 10)</option>
         <option>20 items per page</option>
       </select>
     </div>
