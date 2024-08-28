@@ -14,7 +14,7 @@ const FacilityDetail = () => {
   return (
     <div>
       <h1 className="mt-12 mb-6 text-center text-2xl">
-        Details about Your Product {name}
+        Details about Your Product <span className="font-bold">{name}</span>
       </h1>
       <div className="hero bg-base-200 min-h-[70vh]">
         <div className="md:min-w-full hero-content flex-col lg:flex-row items-center justify-between p-24">
