@@ -8,7 +8,7 @@ const Filtering = () => {
         <option>price Lowest to Highest</option>
         <option>price Lowest to Highest</option>
       </select>
-      <select className="select select-bordered w-full max-w-xs rounded-full">
+      <select className="select select-bordered w-full max-w-xs rounded-full my-3 md:my-0">
         <option>5 items per page</option>
         <option disabled selected>
           Items Per Page (Default 10)
