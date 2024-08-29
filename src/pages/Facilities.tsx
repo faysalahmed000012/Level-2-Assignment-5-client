@@ -9,9 +9,7 @@ const Facilities = () => {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("");
   const [limit, setLimit] = useState(10);
-  const { data, isLoading, isError, isFetching } = useGetAllFacilityQuery([
-    { limit },
-  ]);
+  const { data, isLoading, isFetching } = useGetAllFacilityQuery([{ limit }]);
   console.log(data?.data?.facilities);
   let main = data?.data?.facilities;
   if (query && data.data.facilities) {

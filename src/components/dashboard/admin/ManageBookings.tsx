@@ -1,9 +1,9 @@
-const MyBookings = () => {
+const ManageBookings = () => {
   const arr1 = new Array(9).fill("*");
   return (
     <div>
-      <h1 className="text-2xl mt-10 ms-10">My Bookings : </h1>
-      <div className="grid lg:grid-cols-3 gap-6">
+      <h1 className="text-2xl mt-10 ms-10">All Bookings : </h1>
+      <div className="ms-10 grid lg:grid-cols-3 gap-6">
         {arr1.map((item) => (
           <div
             key={item}
@@ -15,16 +15,11 @@ const MyBookings = () => {
                 <p className="max-w-[214px]">456 Sports Ave, Springfield.</p>
               </div>
               <div className="w-full">
-                <p className="">Time : 15:00 - 16:00</p>
+                <p>Time : 15:00 - 16:00</p>
                 <p>Payable Amount : $446</p>
               </div>
-              <div className="flex items-center justify-between gap-6">
-                <button className="btn btn-primary hover:border hover:border-green-500 hover:bg-slate-200 hover:text-black border-0 text-white bg-green-500">
-                  Confirm
-                </button>
-                <button className="btn hover:border hover:border-red-500 hover:bg-slate-200 hover:text-black btn-primary border-0 text-white bg-red-500">
-                  Cancel
-                </button>
+              <div className="">
+                <p className="text-xl text-red-500">Status : Unpaid</p>
               </div>
             </div>
           </div>
@@ -34,4 +29,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default ManageBookings;

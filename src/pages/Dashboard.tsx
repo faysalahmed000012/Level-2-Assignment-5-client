@@ -47,6 +47,30 @@ const Dashboard = () => {
                 My Bookings
               </Link>
             </li>
+            <li>
+              <Link
+                className="text-xl hover:text-primary mt-6"
+                to="/dashboard/manage/bookings"
+              >
+                All Bookings
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-xl hover:text-primary mt-6"
+                to="/dashboard/manage/facilities"
+              >
+                Manage Facilities
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-xl hover:text-primary mt-6"
+                to="/dashboard/manage/admin"
+              >
+                Create Admin
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
