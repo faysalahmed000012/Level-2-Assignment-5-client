@@ -17,7 +17,7 @@ const Bookings = () => {
   ]);
   const [create] = useCreateBookingMutation();
 
-  const handleCheckAvailability = (e: React.SyntheticEvent) => {
+  const handleCheckAvailability = () => {
     refetch();
     console.log(availablity);
   };
@@ -47,14 +47,11 @@ const Bookings = () => {
       <div className="hero bg-base-100 min-h-[60vh]">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-5xl font-semibold">
               Book <span className="font-bold">{data?.data?.name}</span>
             </h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+            <p className="text-xl">Price: ${data?.data?.pricePerHour}</p>
+            <p className="py-6 text-xl">Location {data?.data?.location}</p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
@@ -89,7 +86,7 @@ const Bookings = () => {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleCheckAvailability(e);
+                    handleCheckAvailability();
                   }}
                   className="btn btn-primary bg-green-500 text-white"
                 >
@@ -98,7 +95,7 @@ const Bookings = () => {
               </div>
               <div className="form-control border border-gray-300 rounded-lg mt-3 p-3">
                 <p className="font-semibold">Available Time Slots : </p>
-                {availablity?.data.map((slots: any) => {
+                {availablity?.data.map((slots) => {
                   return (
                     <div
                       key={slots}

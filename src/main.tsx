@@ -4,10 +4,13 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.tsx";
+import ManageFacilities from "./components/dashboard/admin/ManageFacilities.tsx";
+import MyBookings from "./components/dashboard/user/MyBookings.tsx";
 import "./index.css";
 import About from "./pages/About.tsx";
 import Bookings from "./pages/Bookings.tsx";
 import Contact from "./pages/Contact.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 import Facilities from "./pages/Facilities.tsx";
 import FacilityDetail from "./pages/FacilityDetail.tsx";
 import Home from "./pages/Home.tsx";
@@ -51,6 +54,20 @@ const router = createBrowserRouter([
       {
         path: "/booking/:id",
         element: <Bookings />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+          {
+            path: "/dashboard/myBookings",
+            element: <MyBookings />,
+          },
+          {
+            path: "/dashboard/manage/facilities",
+            element: <ManageFacilities />,
+          },
+        ],
       },
     ],
   },
