@@ -29,10 +29,11 @@ const bookingManagementApi = baseApi.injectEndpoints({
     }),
     createBooking: builder.mutation({
       query: (info) => {
+        console.log(info);
         return {
           url: "/bookings",
           method: "POST",
-          body: info.booking,
+          body: info,
         };
       },
     }),

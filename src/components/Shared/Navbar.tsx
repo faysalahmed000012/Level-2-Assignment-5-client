@@ -1,10 +1,12 @@
 import { LuUserCircle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { useAppSelector } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -82,7 +84,7 @@ const Navbar = () => {
                   <a>Dashboard</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button onClick={() => dispatch(logout())}>Logout</button>
                 </li>
               </ul>
             </div>
