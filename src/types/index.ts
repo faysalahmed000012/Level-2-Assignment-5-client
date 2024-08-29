@@ -6,3 +6,8 @@ export type TFacility = {
   location: string;
   isDeleted: boolean;
 };
+
+export type TQueryParam = {
+  name: string;
+  value: boolean | React.Key;
+};

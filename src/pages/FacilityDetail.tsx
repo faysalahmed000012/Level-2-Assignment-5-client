@@ -1,11 +1,12 @@
 import { FaMapLocationDot } from "react-icons/fa6";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetFacilityByIdQuery } from "../redux/features/facility/facilityManagement.api";
 
 const FacilityDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading, isFetching } = useGetFacilityByIdQuery(id);
-  let name, _id, location, pricePerHour, description;
+  let name, _id: string, location, pricePerHour, description;
 
   if (data && data.data) {
     ({ name, _id, location, pricePerHour, description } = data.data);
@@ -38,7 +39,12 @@ const FacilityDetail = () => {
               {location}
             </p>
             <p className="mt-2"> {description}</p>
-            <button className="btn btn-primary text-white">Book</button>
+            <button
+              onClick={() => navigate(`/booking/${_id}`)}
+              className="btn btn-primary text-white"
+            >
+              Book
+            </button>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { LuUserCircle } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { useAppSelector } from "../../redux/hooks";
@@ -63,9 +64,28 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <button className="btn btn-red bg-red-500 text-white font-bold  w-20 transition-all duration-300 ease-in-out transform hover:rounded-full">
-              Log Out
-            </button>
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <LuUserCircle className="w-10 h-10" />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a>Dashboard</a>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
+              </ul>
+            </div>
           </>
         ) : (
           <Link

@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.tsx";
 import "./index.css";
 import About from "./pages/About.tsx";
+import Bookings from "./pages/Bookings.tsx";
 import Contact from "./pages/Contact.tsx";
 import Facilities from "./pages/Facilities.tsx";
 import FacilityDetail from "./pages/FacilityDetail.tsx";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/facility/:id",
         element: <FacilityDetail />,
+      },
+      {
+        path: "/booking/:id",
+        element: <Bookings />,
       },
     ],
   },
