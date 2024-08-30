@@ -14,7 +14,6 @@ const bookingManagementApi = baseApi.injectEndpoints({
     checkAvailability: builder.query({
       query: (queries) => {
         const params = new URLSearchParams();
-        console.log(queries);
         if (queries) {
           queries.forEach((item: TQueryParam) => {
             params.append(item.name, item.value as string);
@@ -37,6 +36,14 @@ const bookingManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getBookingsByUser: builder.query({
+      query: () => {
+        return {
+          url: "/bookings/user",
+          method: "Get",
+        };
+      },
+    }),
   }),
 });
 
@@ -44,4 +51,5 @@ export const {
   useCheckAvailabilityQuery,
   useGetAllBookingsQuery,
   useCreateBookingMutation,
+  useGetBookingsByUserQuery,
 } = bookingManagementApi;

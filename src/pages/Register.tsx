@@ -21,7 +21,6 @@ const Register = () => {
       email: target.email.value,
       password: target.password.value,
       phone: target.phone.value,
-      role: "user",
       address: target.address.value,
     };
     try {

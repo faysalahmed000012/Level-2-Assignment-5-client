@@ -23,22 +23,23 @@ const facilityManagementApi = baseApi.injectEndpoints({
     }),
     createFacility: builder.mutation({
       query: (info) => {
+        console.log(info);
         return {
           url: "/facility",
           method: "POST",
-          body: info.facility,
+          body: info,
         };
       },
     }),
-    // updateFacility: builder.mutation({
-    //   query: (info) => {
-    //     return {
-    //       url: "/facility/:id",
-    //       method: "PUT",
-    //       body: info.facility,
-    //     };
-    //   },
-    // }),
+    updateFacility: builder.mutation({
+      query: (info) => {
+        return {
+          url: `/facility/${info._id}`,
+          method: "PUT",
+          body: info,
+        };
+      },
+    }),
   }),
 });
 
@@ -46,4 +47,5 @@ export const {
   useCreateFacilityMutation,
   useGetAllFacilityQuery,
   useGetFacilityByIdQuery,
+  useUpdateFacilityMutation,
 } = facilityManagementApi;

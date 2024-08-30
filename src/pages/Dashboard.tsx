@@ -1,14 +1,17 @@
 import { FaUserCircle } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import { useGetCurrentUserQuery } from "../redux/features/user/user.api";
+import { useAppSelector } from "../redux/hooks";
 
 const Dashboard = () => {
   const today = new Date();
+  const user = useAppSelector((state) => state.auth.user);
+  const { data } = useGetCurrentUserQuery({ email: user?.email });
   const formattedDate = today.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -18,8 +21,9 @@ const Dashboard = () => {
           <div className="w-full ms-1 lg:ms-10 mt-6 p-10 bg-primary text-white rounded-xl flex gap-14">
             <FaUserCircle className="w-[100px] h-[100px]" />
             <div>
-              <h1 className="text-2xl">Hello Faysal</h1>
-              <p>Role : Admin</p>
+              <h1 className="text-2xl">Welcome {data?.data?.name}!</h1>
+              <p>Phone : {data?.data?.phone}</p>
+              <p>Role : {user?.role}</p>
               <p>{formattedDate}</p>
             </div>
           </div>
@@ -39,38 +43,43 @@ const Dashboard = () => {
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex items-center">
             {/* Sidebar content here */}
-            <li>
-              <Link
-                className="text-xl hover:text-primary mt-6"
-                to="/dashboard/myBookings"
-              >
-                My Bookings
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="text-xl hover:text-primary mt-6"
-                to="/dashboard/manage/bookings"
-              >
-                All Bookings
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="text-xl hover:text-primary mt-6"
-                to="/dashboard/manage/facilities"
-              >
-                Manage Facilities
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="text-xl hover:text-primary mt-6"
-                to="/dashboard/manage/admin"
-              >
-                Create Admin
-              </Link>
-            </li>
+            {user?.role === "user" ? (
+              <li>
+                <Link
+                  className="text-xl hover:text-primary mt-6"
+                  to="/dashboard/myBookings"
+                >
+                  My Bookings
+                </Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/manage/bookings"
+                  >
+                    All Bookings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/manage/facilities"
+                  >
+                    Manage Facilities
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/manage/admin"
+                  >
+                    Create Admin
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

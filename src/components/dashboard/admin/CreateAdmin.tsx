@@ -1,9 +1,39 @@
+import React from "react";
+import { useMakeAdminMutation } from "../../../redux/features/user/user.api";
+
 const CreateAdmin = () => {
+  const [createAdmin] = useMakeAdminMutation();
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      name: { value: string };
+      email: { value: string };
+      password: { value: string };
+      phone: { value: string };
+      address: { value: string };
+    };
+    const user = {
+      name: target.name.value,
+      email: target.email.value,
+      password: target.password.value,
+      phone: target.phone.value,
+      address: target.address.value,
+    };
+    try {
+      const res = await createAdmin(user);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
+          <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="input input-bordered flex items-center gap-2">
                 <svg

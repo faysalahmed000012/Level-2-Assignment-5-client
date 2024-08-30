@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { useGetAllFacilityQuery } from "../../../../redux/features/facility/facilityManagement.api";
 import { TFacility } from "../../../../types";
+import AddEditModal from "./AddEditModal";
 import Controllers from "./Controllers";
 
 const ManageFacilities = () => {
-  const { data, isLoading } = useGetAllFacilityQuery([{ limit: 10 }]);
+  const [limit, setLimit] = useState(10);
+  const { data, isLoading } = useGetAllFacilityQuery([{ limit }]);
   return (
     <div>
       <h1 className="text-2xl mt-10 ms-10 mb-6">All Facilities : </h1>
       <div className="ms-10">
-        <Controllers />
+        <Controllers setLimit={setLimit} />
       </div>
       {isLoading && (
         <div>
@@ -38,9 +41,8 @@ const ManageFacilities = () => {
               </p>
               <p className="mt-2"> {item.description}</p>
               <div className="card-actions flex items-center justify-between">
-                <button className="btn bg-green-500 text-white hover:border hover:border-green-500 hover:bg-slate-200 hover:text-black">
-                  Edit
-                </button>
+                <AddEditModal isEditMode={true} facility={item} />
+
                 <button className="btn bg-red-500 text-white hover:bg-slate-200 hover:border hover:border-red-500 hover:text-black">
                   Delete
                 </button>

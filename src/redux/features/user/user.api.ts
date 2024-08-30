@@ -10,16 +10,31 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    makeAdmin: builder.mutation({
+      query: (payload) => {
+        return {
+          url: "/users/admin",
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
     getCurrentUser: builder.query({
-      query: (args) => {
+      query: (query) => {
+        const params = new URLSearchParams();
+        params.append("email", query.email);
         return {
           url: "/users/email",
           method: "GET",
-          body: args.email,
+          params: params,
         };
       },
     }),
   }),
 });
 
-export const { useGetAllUsersQuery, useGetCurrentUserQuery } = userApi;
+export const {
+  useGetAllUsersQuery,
+  useGetCurrentUserQuery,
+  useMakeAdminMutation,
+} = userApi;

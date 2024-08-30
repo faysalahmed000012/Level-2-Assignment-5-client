@@ -1,11 +1,14 @@
 import AddEditModal from "./AddEditModal";
 
-const Controllers = () => {
+const Controllers = ({ setLimit }) => {
   return (
     <div>
       <div className="mt-10 mb-6 lg:flex justify-between">
-        <AddEditModal />
-        <select className="select select-bordered w-full max-w-xs rounded-full my-3 md:my-0">
+        <AddEditModal isEditMode={false} facility={null} />
+        <select
+          onChange={(e) => setLimit(e.target.value)}
+          className="select select-bordered w-full max-w-xs rounded-full my-3 md:my-0"
+        >
           <option value={5}>5 items per page</option>
           <option selected value={10}>
             Items Per Page (Default 10)
