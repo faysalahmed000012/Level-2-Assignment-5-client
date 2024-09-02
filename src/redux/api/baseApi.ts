@@ -11,8 +11,7 @@ import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl:
-    "level-2-assignemnt-3-kn9576j5i-faysalahmed000012s-projects.vercel.app/api",
+  baseUrl: "https://level-2-assignemnt-3.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -42,7 +41,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     console.log("Sending refresh token");
 
     const res = await fetch(
-      "level-2-assignemnt-3-kn9576j5i-faysalahmed000012s-projects.vercel.app/api/auth/refresh-token",
+      "https://level-2-assignemnt-3.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",
