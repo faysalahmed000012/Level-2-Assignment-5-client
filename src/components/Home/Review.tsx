@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import reviews from "../../data/Review.json";
 
 const Review = () => {
-  const arr = new Array(8).fill("*");
   return (
     <div>
       <h1 className="mt-20 mb-6 lg:text-3xl text-xl">

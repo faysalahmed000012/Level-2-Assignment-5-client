@@ -28,10 +28,6 @@ const Login = () => {
       const user = verifyToken(res.data.token) as TUser;
       dispatch(setUser({ user: user, token: res.data.token }));
 
-      if (res.success == "false") {
-        toast.error(res.message);
-      }
-
       navigate("/");
       toast.success("Logged in successfully");
     } catch (error: any) {
