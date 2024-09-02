@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from "react";
 import { Button, Modal } from "react-daisyui";
 import { FaImage } from "react-icons/fa6";
 import { IoPricetags } from "react-icons/io5";
+import { toast } from "react-toastify";
 import {
   useCreateFacilityMutation,
   useUpdateFacilityMutation,
@@ -24,7 +25,7 @@ const AddEditModal = ({ isEditMode, facility }) => {
       location: { value: string };
       description: { value: string };
     };
-    const facility = {
+    const newFacility = {
       name: target.name.value,
       imgUrl: target.imgUrl.value,
       pricePerHour: Number(target.price.value),
@@ -33,16 +34,14 @@ const AddEditModal = ({ isEditMode, facility }) => {
     };
 
     try {
-      let res;
       if (isEditMode) {
-        res = await edit(facility);
+        await edit({ facility: newFacility, _id: facility._id });
       } else {
-        res = await add(facility);
+        await add(newFacility);
       }
-      console.log(res);
       document.location.reload();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.message || "something went wrong please try again");
     }
   };
   return (

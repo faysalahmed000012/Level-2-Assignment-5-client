@@ -7,7 +7,7 @@ const Members = () => {
       <h1 className="mt-10 mb-6 text-2xl text-center">
         Get to Know Our Team Members
       </h1>
-      <div className="grid lg:grid-cols-3 justify-items-center">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {data.map((item) => (
           <div key={item.name} className="card my-3 bg-base-100 w-96 shadow-xl">
             <figure className="px-10 pt-10">

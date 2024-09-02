@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useSignUpMutation } from "../redux/features/auth/authApi";
 
 const Register = () => {
@@ -25,10 +26,10 @@ const Register = () => {
     };
     try {
       await signUp(user);
-      console.log("registered successfully");
+      toast.success("registered successfully");
       navigate("/login");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 

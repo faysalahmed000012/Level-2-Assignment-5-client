@@ -1,5 +1,5 @@
 import { LuUserCircle } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { logout } from "../../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -36,13 +36,34 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link to="/contact">Contact</Link>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-primary" : "inactive"
+                }
+                to="/contact"
+              >
+                Contact
+              </NavLink>
             </li>
             <li>
-              <Link to="/about">About Us</Link>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-primary" : "inactive"
+                }
+                to="/about"
+              >
+                About Us
+              </NavLink>
             </li>
             <li>
-              <Link to="/register">Register</Link>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-primary" : "inactive"
+                }
+                to="/register"
+              >
+                Register
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -53,13 +74,34 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/contact">Contact</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "inactive"
+              }
+              to="/contact"
+            >
+              Contact
+            </NavLink>
           </li>
           <li>
-            <Link to="/about">About Us</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "inactive"
+              }
+              to="/about"
+            >
+              About Us
+            </NavLink>
           </li>
           <li>
-            <Link to="/register">Register</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "inactive"
+              }
+              to="/register"
+            >
+              Register
+            </NavLink>
           </li>
         </ul>
       </div>

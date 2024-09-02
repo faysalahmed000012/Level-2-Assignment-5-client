@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
@@ -18,9 +19,6 @@ const Login = () => {
       password: { value: string };
     };
 
-    console.log(target?.email?.value);
-    console.log(target?.password?.value);
-
     try {
       const userInfo = {
         email: target?.email?.value,
@@ -30,9 +28,14 @@ const Login = () => {
       const user = verifyToken(res.data.token) as TUser;
       dispatch(setUser({ user: user, token: res.data.token }));
 
+      if (res.success == "false") {
+        toast.error(res.message);
+      }
+
       navigate("/");
-    } catch (error) {
-      console.log(error);
+      toast.success("Logged in successfully");
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
   return (

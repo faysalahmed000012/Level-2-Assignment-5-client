@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useMakeAdminMutation } from "../../../redux/features/user/user.api";
 
 const CreateAdmin = () => {
@@ -22,10 +23,9 @@ const CreateAdmin = () => {
       address: target.address.value,
     };
     try {
-      const res = await createAdmin(user);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+      await createAdmin(user);
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 

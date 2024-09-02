@@ -1,12 +1,22 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   useCheckAvailabilityQuery,
   useCreateBookingMutation,
 } from "../redux/features/booking/bookingManagement.api";
 import { useGetFacilityByIdQuery } from "../redux/features/facility/facilityManagement.api";
+import { useAppSelector } from "../redux/hooks";
 
 const Bookings = () => {
+  const navigate = useNavigate();
+
+  const user = useAppSelector((state) => state.auth.user);
+  if (user?.role == "admin") {
+    navigate("/");
+    toast.error("Admins Can not book!");
+  }
+
   const today = new Date().toISOString().slice(0, 10);
   const [date, setDate] = useState(today);
   const { id } = useParams();
@@ -19,7 +29,6 @@ const Bookings = () => {
 
   const handleCheckAvailability = () => {
     refetch();
-    console.log(availablity);
   };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -29,29 +38,37 @@ const Bookings = () => {
       startTime: { value: number };
       endTime: { value: number };
     };
+    const refine = (value) => {
+      if (value && value < 10 && value.length < 2) {
+        return "0" + value;
+      }
+      return value;
+    };
 
     const booking = {
       facility: data?.data?._id,
       date: date,
-      startTime: `${target.startTime.value}:00`,
-      endTime: `${target.endTime.value}:00`,
+      startTime: `${refine(target.startTime.value)}:00`,
+      endTime: `${refine(target.endTime.value)}:00`,
     };
-    console.log(booking);
     const response = await create(booking);
-    console.log(response);
+    if (response?.data?.data?.result == "true") {
+      window.location.replace(response.data?.data?.payment_url);
+    }
   };
 
   return (
     <div>
-      <h1>Hey Pal! wanna book {data?.data?.name}</h1>
       <div className="hero bg-base-100 min-h-[60vh]">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-semibold">
               Book <span className="font-bold">{data?.data?.name}</span>
             </h1>
-            <p className="text-xl">Price: ${data?.data?.pricePerHour}</p>
-            <p className="py-6 text-xl">Location {data?.data?.location}</p>
+            <p className="text-xl">
+              Price Per Hour: ${data?.data?.pricePerHour}
+            </p>
+            <p className="py-6 text-xl">Location: {data?.data?.location}</p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
@@ -82,10 +99,9 @@ const Bookings = () => {
                   required
                 />
               </div>
-              <div onClick={(e) => e.stopPropagation()}>
+              <div>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
+                  onClick={() => {
                     handleCheckAvailability();
                   }}
                   className="btn btn-primary bg-green-500 text-white"

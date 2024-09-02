@@ -1,5 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useGetCurrentUserQuery } from "../redux/features/user/user.api";
 import { useAppSelector } from "../redux/hooks";
 
@@ -45,38 +45,38 @@ const Dashboard = () => {
             {/* Sidebar content here */}
             {user?.role === "user" ? (
               <li>
-                <Link
-                  className="text-xl hover:text-primary mt-6"
+                <NavLink
+                  className={`text-xl hover:text-primary mt-6`}
                   to="/dashboard/myBookings"
                 >
                   My Bookings
-                </Link>
+                </NavLink>
               </li>
             ) : (
               <>
                 <li>
-                  <Link
+                  <NavLink
                     className="text-xl hover:text-primary mt-6"
                     to="/dashboard/manage/bookings"
                   >
                     All Bookings
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     className="text-xl hover:text-primary mt-6"
                     to="/dashboard/manage/facilities"
                   >
                     Manage Facilities
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     className="text-xl hover:text-primary mt-6"
                     to="/dashboard/manage/admin"
                   >
                     Create Admin
-                  </Link>
+                  </NavLink>
                 </li>
               </>
             )}

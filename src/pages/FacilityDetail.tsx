@@ -6,10 +6,10 @@ const FacilityDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, isFetching } = useGetFacilityByIdQuery(id);
-  let name, _id: string, location, pricePerHour, description;
+  let name, _id, location, pricePerHour, description, imgUrl;
 
   if (data && data.data) {
-    ({ name, _id, location, pricePerHour, description } = data.data);
+    ({ name, _id, location, pricePerHour, description, imgUrl } = data.data);
   }
 
   return (
@@ -20,7 +20,7 @@ const FacilityDetail = () => {
       <div className="hero bg-base-200 min-h-[70vh]">
         <div className="md:min-w-full hero-content flex-col lg:flex-row items-center justify-between p-24">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+            src={imgUrl}
             className=" w-[20%] h-[10%] rounded-lg shadow-2xl"
           />
           <div className="md:max-w-[50%] mx-auto">

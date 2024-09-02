@@ -2,7 +2,6 @@ import { useGetAllBookingsQuery } from "../../../redux/features/booking/bookingM
 
 const ManageBookings = () => {
   const { data } = useGetAllBookingsQuery(undefined);
-  console.log(data);
   return (
     <div>
       <h1 className="text-2xl mt-10 ms-10">All Bookings : </h1>
@@ -22,9 +21,14 @@ const ManageBookings = () => {
                   Time : {booking.startTime} - {booking.endTime}
                 </p>
                 <p>Payable Amount : ${booking.payableAmount}</p>
+                <p>Transaction Id : ${booking.tranId}</p>
               </div>
               <div className="">
-                <p className="text-xl text-red-500">Status : Unpaid</p>
+                {booking.isBooked == "confirmed" ? (
+                  <p className="text-xl text-green-500">Status: Confirmed</p>
+                ) : (
+                  <p className="text-xl text-red-500">Status Unpaid</p>
+                )}
               </div>
             </div>
           </div>

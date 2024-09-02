@@ -1,3 +1,4 @@
+import { TQueryParam } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const facilityManagementApi = baseApi.injectEndpoints({
@@ -5,7 +6,11 @@ const facilityManagementApi = baseApi.injectEndpoints({
     getAllFacility: builder.query({
       query: (queries) => {
         const params = new URLSearchParams();
-        params.append("limit", queries[0].limit);
+        if (queries) {
+          queries.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
         return {
           url: "/facility",
           method: "GET",
@@ -23,7 +28,6 @@ const facilityManagementApi = baseApi.injectEndpoints({
     }),
     createFacility: builder.mutation({
       query: (info) => {
-        console.log(info);
         return {
           url: "/facility",
           method: "POST",
@@ -36,7 +40,15 @@ const facilityManagementApi = baseApi.injectEndpoints({
         return {
           url: `/facility/${info._id}`,
           method: "PUT",
-          body: info,
+          body: info.facility,
+        };
+      },
+    }),
+    deleteFacility: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/facility/${id}`,
+          method: "DELETE",
         };
       },
     }),
@@ -48,4 +60,5 @@ export const {
   useGetAllFacilityQuery,
   useGetFacilityByIdQuery,
   useUpdateFacilityMutation,
+  useDeleteFacilityMutation,
 } = facilityManagementApi;

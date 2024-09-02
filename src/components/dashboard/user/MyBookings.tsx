@@ -1,9 +1,20 @@
-import { useGetBookingsByUserQuery } from "../../../redux/features/booking/bookingManagement.api";
+import {
+  useCancelBookingMutation,
+  useGetBookingsByUserQuery,
+} from "../../../redux/features/booking/bookingManagement.api";
+import BookingDetailModal from "./BookingDetailModal";
 
 const MyBookings = () => {
-  const arr1 = new Array(9).fill("*");
   const { data } = useGetBookingsByUserQuery(undefined);
-  console.log(data?.data);
+  const [cancel] = useCancelBookingMutation();
+
+  const handleCancel = (id: string) => {
+    if (confirm("Are You Sure You Want to Cancel This Booking ?")) {
+      cancel(id);
+      document.location.reload();
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl mt-10 ms-10">My Bookings : </h1>
@@ -27,10 +38,11 @@ const MyBookings = () => {
                 <p>Payable Amount : ${booking.payableAmount}</p>
               </div>
               <div className="flex items-center justify-between gap-6">
-                <button className="btn btn-primary hover:border hover:border-green-500 hover:bg-slate-200 hover:text-black border-0 text-white bg-green-500">
-                  Confirm
-                </button>
-                <button className="btn hover:border hover:border-red-500 hover:bg-slate-200 hover:text-black btn-primary border-0 text-white bg-red-500">
+                <BookingDetailModal booking={booking} />
+                <button
+                  onClick={() => handleCancel(booking._id)}
+                  className="btn hover:border hover:border-red-500 hover:bg-slate-200 hover:text-black btn-primary border-0 text-white bg-red-500"
+                >
                   Cancel
                 </button>
               </div>

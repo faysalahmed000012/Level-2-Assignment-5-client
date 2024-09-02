@@ -28,7 +28,6 @@ const bookingManagementApi = baseApi.injectEndpoints({
     }),
     createBooking: builder.mutation({
       query: (info) => {
-        console.log(info);
         return {
           url: "/bookings",
           method: "POST",
@@ -44,6 +43,14 @@ const bookingManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    cancelBooking: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/bookings/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
@@ -52,4 +59,5 @@ export const {
   useGetAllBookingsQuery,
   useCreateBookingMutation,
   useGetBookingsByUserQuery,
+  useCancelBookingMutation,
 } = bookingManagementApi;

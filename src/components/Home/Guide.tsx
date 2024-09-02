@@ -6,36 +6,34 @@ const Guide = () => {
         <li className="step step-neutral">
           <div className="bg-gray-200 rounded-lg py-6 px-3 mb-4 max-w-[70%]">
             <p className="text-center font-medium">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam,
-              minima quis. Impedit qui excepturi voluptatem dolor odio, officia
-              dolorem eius.
+              If you are a new user register first. If your registration is
+              successful, it will bring you into login page. Login and choose
+              facility to book.
             </p>
           </div>
         </li>
         <li className="step step-neutral">
           <div className="bg-gray-200 rounded-lg py-6 px-3 mb-4 max-w-[70%]">
             <p className="text-center font-medium">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam,
-              minima quis. Impedit qui excepturi voluptatem dolor odio, officia
-              dolorem eius.
+              When you select your desired facility, you can go to detail page
+              and click 'book' button there.
             </p>
           </div>
         </li>
         <li className="step step-neutral">
           <div className="bg-gray-200 rounded-lg py-6 px-3 mb-4 max-w-[70%]">
             <p className="text-center font-medium">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam,
-              minima quis. Impedit qui excepturi voluptatem dolor odio, officia
-              dolorem eius.
+              Fill up the form in the booking page with correct information.
+              Double check the time conflict and choose your desired time to
+              book hourly and proceed to pay.
             </p>
           </div>
         </li>
         <li className="step step-neutral">
           <div className="bg-gray-200 max-w-[70%] rounded-lg py-6 px-3 mb-4">
             <p className="text-center font-medium">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam,
-              minima quis. Impedit qui excepturi voluptatem dolor odio, officia
-              dolorem eius.
+              Congratulations! You have successfully booked a facility from
+              Sport Haven
             </p>
           </div>
         </li>

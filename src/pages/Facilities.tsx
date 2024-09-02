@@ -8,9 +8,15 @@ import { TFacility } from "../types";
 const Facilities = () => {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("");
+  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const { data, isLoading, isFetching } = useGetAllFacilityQuery([{ limit }]);
-  console.log(data?.data?.facilities);
+  const { data, isLoading, isFetching } = useGetAllFacilityQuery([
+    { name: "limit", value: limit },
+    { name: "page", value: page },
+  ]);
+  const totalPage = data?.data?.meta?.totalPage || 1;
+  const numbers = [...Array(totalPage + 1).keys()].slice(1);
+
   let main = data?.data?.facilities;
   if (query && data.data.facilities) {
     main = data.data.facilities.filter(
@@ -19,11 +25,13 @@ const Facilities = () => {
         item.location.toLowerCase().includes(query.toLowerCase())
     );
   }
+
   if (sort == "low to high") {
     main = [...main].sort((a, b) => a.pricePerHour - b.pricePerHour);
   } else if (sort == "high to low") {
     main = [...main].sort((a, b) => b.pricePerHour - a.pricePerHour);
   }
+
   return (
     <div>
       <h1 className="mt-10 mb-6 text-2xl text-center">
@@ -39,6 +47,23 @@ const Facilities = () => {
             <FacilityCard key={item._id} facility={item} />
           ))
         )}
+      </div>
+      <div className="mt-6 flex flex-col items-end">
+        <p className="font-light">Page : </p>
+        <div className="join">
+          {numbers.map((n, i) => (
+            <input
+              onClick={() => setPage(n)}
+              key={i}
+              className={`join-item btn btn-square ${
+                data?.data?.meta.page == n ? "active" : ""
+              }`}
+              type="radio"
+              name="options"
+              aria-label={`${n}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
