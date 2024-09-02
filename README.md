@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Sport Haven
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+Sport Haven is a sport facility management website. Alex Rahman, the founder of sport haven start his business with a big dream to provide better sport facilities. Starting with only 10 people, now it is one of the biggest sport facility management platform in the country.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+Main purpose of this project is to create a website both front-end and backend for sport haven where user can book their facilities, pay rent and manage their bookings. Also admins can manage facilities and see bookings too.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features
 
-- Configure the top-level `parserOptions` property like this:
+- User Sign in and Login.
+- Sorting, Filtering and Searching Facilities.
+- Booking System.
+- Pay Online.
+- Manage Bookings.
+- Admin and User Dashboard.
+- Admin can manage facilities, Create other admins and see bookings.
+- User can see and manage their bookings too.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Technology Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- React
+- Typescript
+- React Router
+- Tailwind CSS
+- MongoDB
+- Express JS
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## How to install
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Prerequisites
+
+- Your Computer must have git installed.
+- Your Computer must have node js installed.
+- Your Computer must have Typescript installed.
+
+### Steps
+
+Please follow the below instructions to run different branches of this repository in your machine:
+
+1. Login to your GitHub account in your Terminal.
+
+2. Clone this repository
+   ```sh
+   git clone https://github.com/faysalahmed000012/Level-2-Assignment-5-client.git
+   ```
+3. Go to the cloned project directory
+   ```sh
+   cd Level-2-Assignment-5-client
+   ```
+4. Run these commands (Make sure typescript is installed in your computer)
+
+   ```sh
+   npm install
+
+   ```
+
+5. Now Run the project
+   ```sh
+   npm run dev
+   ```

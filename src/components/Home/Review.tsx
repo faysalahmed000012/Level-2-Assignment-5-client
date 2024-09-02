@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { A11y, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import man from "../../assets/images/man.jpeg";
+import reviews from "../../data/Review.json";
 
 const Review = () => {
   const arr = new Array(8).fill("*");
@@ -42,21 +42,22 @@ const Review = () => {
         spaceBetween={50}
         navigation
       >
-        {arr.map((item) => (
-          <SwiperSlide key={item}>
+        {reviews.map((item) => (
+          <SwiperSlide key={item.name}>
             <div className="card bg-base-100 lg:w-96 shadow-xl w-80">
               <div className="card-body">
                 <div className="flex gap-3">
-                  <img className="w-10 h-10 rounded-full" src={man} alt="" />
+                  <img
+                    className="w-10 h-10 rounded-full"
+                    src={item.imgUrl}
+                    alt=""
+                  />
                   <div>
-                    <h2 className="card-title">John Doe</h2>
+                    <h2 className="card-title">{item.name}</h2>
                     <p className="">Rated: ⭐⭐⭐⭐⭐</p>
                   </div>
                 </div>
-                <p>
-                  This is the best facility I've Every seen I am going to give
-                  them 5 star 💫
-                </p>
+                <p>{item.description} 💫</p>
               </div>
             </div>
           </SwiperSlide>
