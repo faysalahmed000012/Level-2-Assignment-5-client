@@ -55,16 +55,18 @@ const Navbar = () => {
                 About Us
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-primary" : "inactive"
-                }
-                to="/register"
-              >
-                Register
-              </NavLink>
-            </li>
+            {!user && (
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "inactive"
+                  }
+                  to="/register"
+                >
+                  Register
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <Link to="/">
@@ -93,16 +95,18 @@ const Navbar = () => {
               About Us
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-primary" : "inactive"
-              }
-              to="/register"
-            >
-              Register
-            </NavLink>
-          </li>
+          {!user && (
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-primary" : "inactive"
+                }
+                to="/register"
+              >
+                Register
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">

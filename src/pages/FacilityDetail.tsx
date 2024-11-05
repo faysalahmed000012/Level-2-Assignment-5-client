@@ -1,6 +1,30 @@
-import { FaMapLocationDot } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetFacilityByIdQuery } from "../redux/features/facility/facilityManagement.api";
+import FacilityCard from "../components/Shared/FacilityCard";
+import {
+  useGetAllFacilityQuery,
+  useGetFacilityByIdQuery,
+} from "../redux/features/facility/facilityManagement.api";
+
+const suggestedProducts = [
+  {
+    id: 1,
+    image: "/suggested-product-1.jpg",
+    title: "Suggested Product 1",
+    description: "Description of Suggested Product 1",
+  },
+  {
+    id: 2,
+    image: "/suggested-product-2.jpg",
+    title: "Suggested Product 2",
+    description: "Description of Suggested Product 2",
+  },
+  {
+    id: 3,
+    image: "/suggested-product-3.jpg",
+    title: "Suggested Product 3",
+    description: "Description of Suggested Product 3",
+  },
+];
 
 const FacilityDetail = () => {
   const { id } = useParams();
@@ -12,8 +36,62 @@ const FacilityDetail = () => {
     ({ name, _id, location, pricePerHour, description, imgUrl } = data.data);
   }
 
+  const { data: facilityData } = useGetAllFacilityQuery([
+    { name: "limit", value: 3 },
+    { name: "page", value: 1 },
+  ]);
+
   return (
-    <div>
+    <div className="bg-gray-100 min-h-screen">
+      <header className="bg-gray-800 text-white py-4">
+        <div className="container mx-auto px-4">
+          <h1 className="text-2xl font-bold">{name}</h1>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8 md:flex">
+        <div className="md:w-1/2 mb-8 md:mb-0">
+          <img src={imgUrl} alt="Football Field" className="w-full h-auto" />
+        </div>
+        <div className="md:w-1/2 md:pl-8">
+          <div className="card w-full bg-base-100 shadow-xl">
+            <div className="card-body">
+              <h2 className="card-title">{name}</h2>
+              <p className="text-gray-600">Price Per Hour: {pricePerHour}</p>
+              <p className="text-gray-600">Location: {location}</p>
+              <p className="text-gray-600">{description}</p>
+              <div className="card-actions justify-start">
+                <button
+                  onClick={() => navigate(`/booking/${_id}`)}
+                  className="btn btn-primary"
+                >
+                  Book
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <section className="bg-gray-200 py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-4">Suggested </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {facilityData?.data?.facilities?.map((product) => (
+              <FacilityCard key={product._id} facility={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default FacilityDetail;
+
+/*
+
+  <div>
       <h1 className="mt-12 mb-6 text-center text-2xl">
         Details about Your Product <span className="font-bold">{name}</span>
       </h1>
@@ -49,7 +127,5 @@ const FacilityDetail = () => {
         </div>
       </div>
     </div>
-  );
-};
 
-export default FacilityDetail;
+*/

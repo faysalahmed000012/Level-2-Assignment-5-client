@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import CreateAdmin from "./components/dashboard/admin/CreateAdmin.tsx";
 import ManageFacilities from "./components/dashboard/admin/facility management/ManageFacilities.tsx";
 import ManageBookings from "./components/dashboard/admin/ManageBookings.tsx";
+import Statistics from "./components/dashboard/admin/statistics/Statistics.tsx";
+import Profile from "./components/dashboard/Profile.tsx";
 import MyBookings from "./components/dashboard/user/MyBookings.tsx";
 import "./index.css";
 import About from "./pages/About.tsx";
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
+          {
+            path: "/dashboard",
+            element: <Statistics />,
+          },
+          {
+            path: "/dashboard/profile",
+            element: <Profile />,
+          },
           {
             path: "/dashboard/myBookings",
             element: <MyBookings />,

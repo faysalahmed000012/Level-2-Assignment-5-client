@@ -35,7 +35,7 @@ const MyBookings = () => {
                 <p className="">
                   Time : {booking.startTime} - {booking.endTime}
                 </p>
-                <p>Payable Amount : ${booking.payableAmount}</p>
+                <p>Amount Paid : ${booking.payableAmount}</p>
               </div>
               <div className="flex items-center justify-between gap-6">
                 <BookingDetailModal booking={booking} />

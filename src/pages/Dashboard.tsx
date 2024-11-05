@@ -44,16 +44,50 @@ const Dashboard = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex items-center">
             {/* Sidebar content here */}
             {user?.role === "user" ? (
-              <li>
-                <NavLink
-                  className={`text-xl hover:text-primary mt-6`}
-                  to="/dashboard/myBookings"
-                >
-                  My Bookings
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    className={`text-xl hover:text-primary mt-6`}
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={`text-xl hover:text-primary mt-6`}
+                    to="/dashboard/profile"
+                  >
+                    My Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={`text-xl hover:text-primary mt-6`}
+                    to="/dashboard/myBookings"
+                  >
+                    My Bookings
+                  </NavLink>
+                </li>
+              </>
             ) : (
               <>
+                <li>
+                  <NavLink
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/profile"
+                  >
+                    My Profile
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     className="text-xl hover:text-primary mt-6"

@@ -17,6 +17,7 @@ const ManageBookings = () => {
                 <p className="max-w-[214px]">{booking.facility.location}</p>
               </div>
               <div className="w-full">
+                <p>Date : {booking.date}</p>
                 <p>
                   Time : {booking.startTime} - {booking.endTime}
                 </p>

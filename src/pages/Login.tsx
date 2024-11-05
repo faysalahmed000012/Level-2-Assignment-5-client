@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLoginMutation } from "../redux/features/auth/authApi";
@@ -10,19 +10,21 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleAdminCredential = () => {
+    setEmail("faysal000012@gmail.com");
+    setPassword("faysalAhmed");
+  };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-
     try {
       const userInfo = {
-        email: target?.email?.value,
-        password: target?.password?.value,
+        email,
+        password,
       };
       const res = await login(userInfo);
       const user = verifyToken(res.data.token) as TUser;
@@ -42,6 +44,14 @@ const Login = () => {
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6"></p>
           </div>
+          <div>
+            <button
+              onClick={handleAdminCredential}
+              className="btn btn-primary text-white"
+            >
+              Admin Credential
+            </button>
+          </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleSubmit} className="card-body">
               <div className="form-control">
@@ -50,7 +60,8 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="email"
                   className="input input-bordered"
                   required
@@ -63,7 +74,8 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="password"
-                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="input input-bordered"
                   required
                 />
