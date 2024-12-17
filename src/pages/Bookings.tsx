@@ -21,15 +21,11 @@ const Bookings = () => {
   const [date, setDate] = useState(today);
   const { id } = useParams();
   const { data } = useGetFacilityByIdQuery(id);
-  const { data: availablity, refetch } = useCheckAvailabilityQuery([
+  const { data: availablity } = useCheckAvailabilityQuery([
     { name: "date", value: date },
     { name: "facility", value: data?.data?._id },
   ]);
   const [create] = useCreateBookingMutation();
-
-  const handleCheckAvailability = () => {
-    refetch();
-  };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();

@@ -4,7 +4,7 @@ import offerImage from "../../assets/images/footballFacility.jpeg";
 const WinterOfferSection = () => {
   const navigate = useNavigate();
   return (
-    <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 mt-24 container mx-auto">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex flex-col justify-center max-h-[300px]">

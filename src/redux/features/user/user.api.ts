@@ -19,6 +19,23 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateUser: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `/users/update/${payload.id}`,
+          method: "POST",
+          body: payload.user,
+        };
+      },
+    }),
+    deleteUser: builder.mutation({
+      query: (userId) => {
+        return {
+          url: `/users/${userId}`,
+          method: "DELETE",
+        };
+      },
+    }),
     getCurrentUser: builder.query({
       query: (query) => {
         const params = new URLSearchParams();
@@ -37,4 +54,6 @@ export const {
   useGetAllUsersQuery,
   useGetCurrentUserQuery,
   useMakeAdminMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = userApi;

@@ -40,8 +40,12 @@ const AddEditModal = ({ isEditMode, facility }) => {
         await add(newFacility);
       }
       document.location.reload();
-    } catch (error: any) {
-      toast.error(error.message || "something went wrong please try again");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
   return (

@@ -8,7 +8,7 @@ const Navbar = () => {
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar container mx-auto bg-base-100 ">
       <div className="navbar-start">
         <div className="dropdown">
           <div

@@ -1,4 +1,3 @@
-//@ts-nocheck
 import {
   Bar,
   BarChart,
@@ -46,7 +45,7 @@ const BookingStatistics = () => {
     bookings.forEach((booking) => {
       try {
         const bookingDate = new Date(booking.date);
-        if (!isNaN(bookingDate)) {
+        if (!isNaN(bookingDate.getTime())) {
           const monthIndex = bookingDate.getMonth();
           monthlyData[monthIndex].count += 1;
         }

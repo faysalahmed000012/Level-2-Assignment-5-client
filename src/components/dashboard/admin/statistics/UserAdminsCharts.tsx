@@ -9,8 +9,6 @@ import {
 import { useGetAllUsersQuery } from "../../../../redux/features/user/user.api";
 
 const UserStatsDashboard = () => {
-  // This would typically come from your Redux store
-
   const {
     data: userData,
     isLoading,
@@ -98,7 +96,7 @@ const UserStatsDashboard = () => {
             <Legend
               verticalAlign="bottom"
               height={36}
-              formatter={(value, entry, index) => (
+              formatter={(value) => (
                 <span className="text-sm text-gray-600">{value}</span>
               )}
             />

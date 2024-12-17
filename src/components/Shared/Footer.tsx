@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo.png";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="container mx-auto">
       <footer className="mt-6 footer bg-base-100 text-base-content p-10">
         <aside>
           <img className="h-16" src={logo} alt="logo" />

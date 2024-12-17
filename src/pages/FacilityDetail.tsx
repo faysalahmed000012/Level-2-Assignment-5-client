@@ -1,32 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FacilityCard from "../components/Shared/FacilityCard";
 import {
   useGetAllFacilityQuery,
   useGetFacilityByIdQuery,
 } from "../redux/features/facility/facilityManagement.api";
+import { TFacility } from "../types";
 
-const suggestedProducts = [
-  {
-    id: 1,
-    image: "/suggested-product-1.jpg",
-    title: "Suggested Product 1",
-    description: "Description of Suggested Product 1",
-  },
-  {
-    id: 2,
-    image: "/suggested-product-2.jpg",
-    title: "Suggested Product 2",
-    description: "Description of Suggested Product 2",
-  },
-  {
-    id: 3,
-    image: "/suggested-product-3.jpg",
-    title: "Suggested Product 3",
-    description: "Description of Suggested Product 3",
-  },
-];
-
-const FacilityDetail = () => {
+const FacilityDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, isFetching } = useGetFacilityByIdQuery(id);
@@ -41,91 +22,145 @@ const FacilityDetail = () => {
     { name: "page", value: 1 },
   ]);
 
-  return (
-    <div className="bg-gray-100 min-h-screen">
-      <header className="bg-gray-800 text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl font-bold">{name}</h1>
-        </div>
-      </header>
+  const [selectedImage, setSelectedImage] = useState(0);
 
-      <main className="container mx-auto px-4 py-8 md:flex">
-        <div className="md:w-1/2 mb-8 md:mb-0">
-          <img src={imgUrl} alt="Football Field" className="w-full h-auto" />
-        </div>
-        <div className="md:w-1/2 md:pl-8">
-          <div className="card w-full bg-base-100 shadow-xl">
+  // Sample images array
+  const images = [imgUrl, imgUrl, imgUrl];
+
+  const amenities = [
+    { icon: "🚿", label: "Changing Rooms" },
+    { icon: "🚰", label: "Water Facilities" },
+    { icon: "🅿️", label: "Parking" },
+    { icon: "💡", label: "LED Lighting" },
+    { icon: "🧹", label: "Maintenance" },
+    { icon: "👥", label: "Staff Support" },
+  ];
+
+  return (
+    <div className="min-h-screen container mx-auto ">
+      {/* Breadcrumb */}
+      <div className="text-sm breadcrumbs px-4 py-4 bg-base-100">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to={`/facility/${_id}`}>{name}</Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="container mx-auto p-4">
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Image Gallery */}
+          <div className="space-y-4">
+            <div className="relative aspect-video">
+              <img
+                src={images[selectedImage]}
+                alt={name}
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              <div className="absolute top-4 right-4">
+                <div className="badge badge-lg bg-primary text-white">
+                  ${pricePerHour}/hr
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-4 overflow-x-auto pb-2">
+              {images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Preview ${index + 1}`}
+                  className={`w-24 h-24 object-cover rounded-lg cursor-pointer transition-all
+                    ${
+                      selectedImage === index
+                        ? "ring-4 ring-primary"
+                        : "opacity-70 hover:opacity-100"
+                    }`}
+                  onClick={() => setSelectedImage(index)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="card bg-base-100 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">{name}</h2>
-              <p className="text-gray-600">Price Per Hour: {pricePerHour}</p>
-              <p className="text-gray-600">Location: {location}</p>
-              <p className="text-gray-600">{description}</p>
-              <div className="card-actions justify-start">
+              <h1 className="card-title text-3xl mb-4">{name}</h1>
+
+              <div className="flex items-center gap-2 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span className="text-base-content/70">{location}</span>
+              </div>
+
+              <div className="divider"></div>
+
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold">Description</h2>
+                <p className="text-base-content/70">{description}</p>
+              </div>
+
+              <div className="divider"></div>
+
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold">Amenities</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {amenities.map((amenity, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <span className="text-xl">{amenity.icon}</span>
+                      <span className="text-sm">{amenity.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="divider"></div>
+
+              <div className="card-actions">
                 <button
                   onClick={() => navigate(`/booking/${_id}`)}
-                  className="btn btn-primary"
+                  className="btn btn-primary text-white w-full"
                 >
-                  Book
+                  Book Now
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </main>
 
-      <section className="bg-gray-200 py-8">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-4">Suggested </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {facilityData?.data?.facilities?.map((product) => (
-              <FacilityCard key={product._id} facility={product} />
+        {/* Suggested Facilities */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">Suggested Facilities</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {facilityData?.data?.facilities?.map((facility: TFacility) => (
+              <FacilityCard key={facility._id} facility={facility} />
             ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default FacilityDetail;
-
-/*
-
-  <div>
-      <h1 className="mt-12 mb-6 text-center text-2xl">
-        Details about Your Product <span className="font-bold">{name}</span>
-      </h1>
-      <div className="hero bg-base-200 min-h-[70vh]">
-        <div className="md:min-w-full hero-content flex-col lg:flex-row items-center justify-between p-24">
-          <img
-            src={imgUrl}
-            className=" w-[20%] h-[10%] rounded-lg shadow-2xl"
-          />
-          <div className="md:max-w-[50%] mx-auto">
-            {(isFetching || isLoading) && (
-              <span className="loading loading-ring loading-lg"></span>
-            )}
-            <h1 className="text-5xl font-bold">{name}</h1>
-            <p className="mt-2">
-              <span className="font-bold">Price Per Hour :</span> $
-              {pricePerHour}
-            </p>
-            <p>
-              <span className="font-bold">
-                <FaMapLocationDot className="inline w-6" /> :{" "}
-              </span>{" "}
-              {location}
-            </p>
-            <p className="mt-2"> {description}</p>
-            <button
-              onClick={() => navigate(`/booking/${_id}`)}
-              className="btn btn-primary text-white"
-            >
-              Book
-            </button>
           </div>
         </div>
       </div>
     </div>
+  );
+};
 
-*/
+export default FacilityDetails;

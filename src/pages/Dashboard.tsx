@@ -14,7 +14,7 @@ const Dashboard = () => {
   });
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open container mx-auto">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center gap-y-6">
           {/* Page content here */}
@@ -102,6 +102,22 @@ const Dashboard = () => {
                     to="/dashboard/manage/facilities"
                   >
                     Manage Facilities
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/manage/create-facility"
+                  >
+                    Create Facility
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="text-xl hover:text-primary mt-6"
+                    to="/dashboard/manage/users"
+                  >
+                    Manage Users
                   </NavLink>
                 </li>
                 <li>

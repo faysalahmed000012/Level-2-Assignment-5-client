@@ -7,8 +7,10 @@ import App from "./App.tsx";
 import AdminRoute from "./components/auth/AdminRoute.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import CreateAdmin from "./components/dashboard/admin/CreateAdmin.tsx";
+import CreateFacilityForm from "./components/dashboard/admin/facility management/CreateFacility.tsx";
 import ManageFacilities from "./components/dashboard/admin/facility management/ManageFacilities.tsx";
 import ManageBookings from "./components/dashboard/admin/ManageBookings.tsx";
+import ManageUsers from "./components/dashboard/admin/ManageUsers.tsx";
 import Statistics from "./components/dashboard/admin/statistics/Statistics.tsx";
 import Profile from "./components/dashboard/Profile.tsx";
 import MyBookings from "./components/dashboard/user/MyBookings.tsx";
@@ -18,7 +20,7 @@ import Bookings from "./pages/Bookings.tsx";
 import Contact from "./pages/Contact.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Facilities from "./pages/Facilities.tsx";
-import FacilityDetail from "./pages/FacilityDetail.tsx";
+import FacilityDetails from "./pages/FacilityDetail.tsx";
 import FailedPayment from "./pages/FailedPayment.tsx";
 import Home from "./pages/Home.tsx";
 import Login from "./pages/Login.tsx";
@@ -58,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/facility/:id",
-        element: <FacilityDetail />,
+        element: <FacilityDetails />,
       },
       {
         path: "/booking/:id",
@@ -97,10 +99,26 @@ const router = createBrowserRouter([
             ),
           },
           {
+            path: "/dashboard/manage/create-facility",
+            element: (
+              <AdminRoute>
+                <CreateFacilityForm />
+              </AdminRoute>
+            ),
+          },
+          {
             path: "/dashboard/manage/bookings",
             element: (
               <AdminRoute>
                 <ManageBookings />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/dashboard/manage/users",
+            element: (
+              <AdminRoute>
+                <ManageUsers />
               </AdminRoute>
             ),
           },

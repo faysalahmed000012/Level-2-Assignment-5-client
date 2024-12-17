@@ -8,12 +8,13 @@ const BookingDetailModal = ({ booking }) => {
   }, [ref]);
   return (
     <div className="font-sans rounded-xl">
-      <Button
-        className="btn btn-primary hover:border hover:border-green-500 hover:bg-slate-200 hover:text-black border-0 text-white bg-green-500"
+      <button
+        className="btn btn-sm text-white btn-primary"
         onClick={handleShow}
       >
         Detail
-      </Button>
+      </button>
+
       <Modal className="p-6 rounded-xl" ref={ref}>
         <form method="dialog">
           <Button

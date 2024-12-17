@@ -8,8 +8,8 @@ import reviews from "../../data/Review.json";
 
 const Review = () => {
   return (
-    <div>
-      <h1 className="mt-20 mb-6 lg:text-3xl text-xl">
+    <div className="container mx-auto">
+      <h1 className="mt-32 mb-10 lg:text-3xl text-xl container mx-auto">
         What our valuable customers say about us 😍
       </h1>
       <Swiper
@@ -42,8 +42,11 @@ const Review = () => {
         navigation
       >
         {reviews.map((item) => (
-          <SwiperSlide key={item.name}>
-            <div className="card bg-base-100 lg:w-96 shadow-xl w-80">
+          <SwiperSlide
+            className="flex items-center justify-center"
+            key={item.name}
+          >
+            <div className="card bg-base-100 lg:w-96 shadow-xl w-[95%]">
               <div className="card-body">
                 <div className="flex gap-3">
                   <img
